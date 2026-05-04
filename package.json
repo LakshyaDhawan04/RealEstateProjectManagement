@@ -1,0 +1,25 @@
+{
+  "name": "real-estate-data-ingestion",
+  "version": "1.0.0",
+  "description": "Data ingestion for Gmail & WhatsApp messages",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "tokalator",
+    "token-usage": "tokdu",
+    "ingestion:gmail": "node src/ingestion/gmail_ingester.js",
+    "ingestion:whatsapp": "node src/ingestion/whatsapp_ingester.js"
+  },
+  "keywords": ["gmail", "whatsapp", "ingestion", "token-tracking"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "google-auth-oauthlib": "^1.2.0",
+    "google-api-python-client": "^2.100.0",
+    "waha-client": "^0.1.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "tokalator": "^1.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "tokenizer": "anthropic",
+  "model": "claude-haiku-4.5",
+  "trackingEnabled": true,
+  "budgetLimit": 100000,
+  "contextThreshold": {
+    "low": 25,
+    "medium": 50,
+    "high": 75
+  },
+  "excludePaths": [
+    "node_modules",
+    ".git",
+    "data",
+    "logs"
+  ],
+  "ignoredExtensions": [
+    ".pyc",
+    ".log",
+    ".tmp"
+  ]
+}

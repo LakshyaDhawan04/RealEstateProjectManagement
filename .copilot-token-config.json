@@ -1,0 +1,135 @@
+{
+  "version": "1.0",
+  "tokenManagement": {
+    "enabled": true,
+    "model": "claude-haiku-4.5",
+    "trackingTool": "tokalator",
+    "globalBudget": 18000,
+    "checkpointThreshold": 75,
+    "constraints": {
+      "responseLength": {
+        "routine": 100,
+        "codeReview": 200,
+        "implementation": 150,
+        "complexAnalysis": 300
+      },
+      "batchOperations": true,
+      "compressContext": true,
+      "reusePriorFindings": true
+    },
+    "rules": [
+      "Batch independent tool calls (view, grep, bash &&)",
+      "Chain bash commands with && instead of separate calls",
+      "Use view_range for large files (>20KB)",
+      "Batch file edits in single response",
+      "Batch web_fetch calls (3-5 URLs parallel)",
+      "Ask all clarifications at once (not sequential)",
+      "Reference prior context instead of repeating",
+      "Keep responses ≤100 words for routine work",
+      "Complete solutions, not partial fixes",
+      "Cache parsed data, avoid re-parsing",
+      "Pin critical files in tokalator sidebar",
+      "Create checkpoint when >75% budget used",
+      "Use SQL todos for multi-phase work",
+      "Summarize history when >50KB",
+      "Log token usage after each phase"
+    ],
+    "phases": {
+      "setup": 2000,
+      "gmailOAuth": 3000,
+      "gmailFetch": 2000,
+      "whatsappParser": 2000,
+      "normalization": 1500,
+      "testing": 2000,
+      "documentation": 1500,
+      "codeReview": 2000
+    },
+    "monitoring": {
+      "dashboardPath": "logs/token_dashboard.sh",
+      "logPath": "logs/token_usage.log",
+      "phaseBudgetPath": "logs/phase_budget.txt",
+      "incidentsPath": "logs/incidents.md",
+      "refreshInterval": "30min",
+      "statusThresholds": {
+        "good": [0, 50],
+        "medium": [50, 75],
+        "high": [75, 90],
+        "critical": [90, 100]
+      }
+    },
+    "modelStrategy": {
+      "haiku": {
+        "description": "Default model for most tasks",
+        "useFor": [
+          "data parsing & ingestion",
+          "code generation (patterns)",
+          "test writing",
+          "documentation",
+          "simple refactoring",
+          "bug fixes (straightforward)"
+        ],
+        "costPer1MTokens": {
+          "input": 0.80,
+          "output": 2.40
+        }
+      },
+      "sonnet": {
+        "description": "Use for complex reasoning",
+        "useFor": [
+          "complex multi-step reasoning (>3 steps)",
+          "architecture decisions",
+          "algorithm design",
+          "deep code reviews",
+          "security analysis",
+          "final sanity check"
+        ],
+        "costPer1MTokens": {
+          "input": 3.00,
+          "output": 15.00
+        }
+      }
+    },
+    "checkpointProcedure": [
+      "Create summary in plan.md",
+      "Update SQL todos status",
+      "Save token usage log entry",
+      "Commit with token reference",
+      "Tag checkpoint with timestamp",
+      "Start new session for next phase"
+    ],
+    "incidentResponse": {
+      "thresholds": {
+        "warning": 75,
+        "critical": 90,
+        "abort": 95
+      },
+      "actions": {
+        "warning": [
+          "Compress context (close unused files)",
+          "Complete current task",
+          "Consider checkpoint"
+        ],
+        "critical": [
+          "Stop new work",
+          "Create checkpoint immediately",
+          "Document root cause",
+          "Start fresh session"
+        ],
+        "abort": [
+          "Revert to GPT-5 mini",
+          "Post-mortem analysis",
+          "Adjust rules for next time"
+        ]
+      }
+    }
+  },
+  "project": {
+    "name": "RealEstateProjectManagement",
+    "repository": "LakshyaDhawan04/RealEstateProjectManagement",
+    "branches": {
+      "main": "Production-ready code",
+      "source-ingestion": "Gmail + WhatsApp data ingesters",
+      "tokenManagement": "Token tracking rules & monitoring"
+    }
+  }
+}

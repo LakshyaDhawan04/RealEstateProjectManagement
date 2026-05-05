@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+npm-debug.log
+
+# Environment variables (credentials)
+.env
+.env.local
+.env.*.local
+
+# Authentication tokens & credentials
+.auth-credentials/
+auth-credentials/
+credentials.json
+token.json
+*-token.json
+
+# Ingested data (local only, not committed)
+data/
+/data/
+
+# OS
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Build output
+dist/
+build/
+
+# Session files
+.copilot/
